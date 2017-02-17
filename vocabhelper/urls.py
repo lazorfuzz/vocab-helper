@@ -4,4 +4,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='index'),
+    url(r'^tos/$', views.TermsOfServicePage.as_view(), name='tos'),
+    url(r'^privacy/$', views.PrivacyPage.as_view(), name='privacy'),
 ]

@@ -5,6 +5,12 @@ from django.http import HttpResponse
 import requests, threading
 from Queue import Queue
 
+class TermsOfServicePage(TemplateView):
+    template_name = 'tos.html'
+
+class PrivacyPage(TemplateView):
+    template_name = 'privacy.html'
+
 class HomePage(TemplateView):
 
     def get(self, request, **kwargs):

@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta property="og:title" content="Vocabulary Helper" />
 <meta property="og:description" content="The fastest way to do your vocab homework!" />
-<meta property="og:url" content="http://www.homeworkhelper.com/" />
+<meta property="og:url" content="http://vocabhw.com/" />
 <meta name="description" content="The fastest way to do your vocab homework!" />
 <meta name="keywords" content="homework, vocabulary, vocab, definition, help, dictionary" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-<link rel='stylesheet' href='{% static "vocabhelper/HH.css" %}?v=1'>
-<link rel="icon" type="image/gif" href="pencil.png" />
+<link rel='stylesheet' href='{% static "vocabhelper/HH.css" %}?v=2'>
+<link rel="icon" type="image/gif" href="{% static 'vocabhelper/media/logo.png' %}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <title>Vocab Helper</title>
@@ -22,7 +22,9 @@
 <nav class='navbar navbar-default' id='nav'>
   <div class='container' style='margin-left:0;'>
     <div class='navbar-header'>
-      <a href='{% url "index" %}' class='index-link'><h1>Vocab Helper</h1></a>
+      <a href='{% url "index" %}' class='index-link'><h1>Vocab Helper</h1><p class='subtitle'>
+        The fastest way to do your vocab homework!
+      </p></a>
     </div>
   </div>
 </nav>
@@ -38,7 +40,7 @@
 </div>
 <footer class="footer">
       <div class="container">
-        <p class="text-muted">Copyright &copy; 2017 Vocab Helper.</p>
+        <p class="text-muted">Copyright &copy; 2017 Vocab Helper. | <a href='{% url "tos" %}' class='footerlink'>Terms of Service</a> | <a href='{% url "privacy" %}' class='footerlink'>Privacy Policy</a></p>
       </div>
 </footer>
 <script>
