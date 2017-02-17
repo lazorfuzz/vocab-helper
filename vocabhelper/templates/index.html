@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta property="og:title" content="Vocabulary Helper" />
+<meta property="og:description" content="The fastest way to do your vocab homework!" />
+<meta property="og:url" content="http://www.homeworkhelper.com/" />
+<meta name="description" content="The fastest way to do your vocab homework!" />
+<meta name="keywords" content="homework, vocabulary, vocab, definition, help, dictionary" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<link rel='stylesheet' href='{% static "vocabhelper/HH.css" %}?v=1'>
+<link rel="icon" type="image/gif" href="pencil.png" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<title>Vocab Helper</title>
+</head>
+
+<body>
+<nav class='navbar navbar-default' id='nav'>
+  <div class='container' style='margin-left:0;'>
+    <div class='navbar-header'>
+      <a href='{% url "index" %}' class='index-link'><h1>Vocab Helper</h1></a>
+    </div>
+  </div>
+</nav>
+<div class='container-fluid col-md-8 col-md-offset-2 wrapper'>
+    <h2 class='animated fadeInDown' id='instructions'>Enter your list of words/phrases. Click Go to see the results.</h2>
+    <div id="words-div">
+            <textarea id="wordspace"></textarea>
+    </div>
+    <div id="define">
+            {% csrf_token %}
+            <button class='button' id="go">Go</button><button class='button' id="copy" style='display:none;'>Copy</button>
+    </div>
+</div>
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Copyright &copy; 2017 Vocab Helper.</p>
+      </div>
+</footer>
+<script>
+
+    var words = $('#wordspace');
+    words.focus();
+
+  $('#go').on('click', function(){
+    var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+    $(this).attr('class', 'button animated bounceOutDown');
+    $('#copy').attr('class', 'button animated bounceOutDown');
+    words.attr('class', 'animated fadeOutRight');
+
+    $('#instructions').text('Please wait.');
+    window.setTimeout(function(){
+      var data = words.val();
+      words.val('');
+      $.post('{% url "index" %}', {'words': data, 'csrfmiddlewaretoken': csrftoken}, function(data){
+        words.val(data);
+      }).always(function(){
+        words.css('display', '');
+        words.attr('class', 'animated fadeInRight');
+        words.focus();
+        $('#instructions').text('Your Results:')
+        words[0].scrollTop = 0;
+        window.setTimeout(function(){
+          $('#go').css('display', '');
+          $('#go').attr('class', 'button animated bounceInUp');
+          $('#copy').css('display', '');
+          $('#copy').attr('class', 'button animated bounceInUp');
+        }, 700);
+      });
+    }, 1500);
+    $('.wrapper').height($(window).height() - $('footer').height());
+  });
+
+  $('#copy').on('click', function(){
+    words.select();
+    document.execCommand("copy");
+    alert('The results have been saved to your clipboard. Thanks for using Vocab Helper. Be sure to recommend us to a friend!');
+  });
+
+</script>
+</body>
+</html>
