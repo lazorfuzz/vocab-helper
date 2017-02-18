@@ -14,16 +14,28 @@
     <link rel='stylesheet' href='{% static "vocabhelper/HH.css" %}?v=2'>
     <title>Vocab Helper Terms of Service</title>
     <style>
-      html,body{
+      html, body{
         overflow: scroll;
-        padding: 1em;
+        padding: 0;
+        margin-bottom: 0;
       }
       p, li, h3{
         color: black;
       }
+      .footer{
+        position: static;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+      }
+      .container-fluid{
+        margin-bottom: 3em;
+      }
     </style>
   </head>
   <body>
+<div class='container-fluid'>
+
 
 <h2>
 	Web Site Terms and Conditions of Use
@@ -116,5 +128,11 @@
 	Any claim relating to Vocab Helper's web site shall be governed by the laws of the State of California without regard to its conflict of law provisions.
 </p>
 <p><a href='{% url "index" %}'>Back</a></p>
+</div>
   </body>
+  <div class="footer">
+        <div>
+          <p class="text-muted">Copyright &copy; 2017 Vocab Helper. | <a href='{% url "tos" %}' class='footerlink'>Terms of Service</a> | <a href='{% url "privacy" %}' class='footerlink'>Privacy Policy</a></p>
+        </div>
+  </div>
 </html>
