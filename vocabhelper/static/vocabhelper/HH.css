@@ -116,5 +116,11 @@ h1{
   }
   h2{
     font-size: 1em;
-  }s
+  }
+  .button{
+    font-size: 1.5em;
+  }
+  .footer{
+    font-size: 0.8em;
+  }
 }
