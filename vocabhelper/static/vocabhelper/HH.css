@@ -4,6 +4,7 @@ html, body {
   backgqround-image: url(http://api.thumbr.it/whitenoise-10x10.png?background=292929ff&noise=3be370&density=2&opacity=19);
   background-repeat: repeat;
   overflow: scroll;
+    
 }
 .navbar{
   background-color: #333 !important;

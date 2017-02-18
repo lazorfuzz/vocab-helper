@@ -20,16 +20,25 @@
         padding: 1em;
       }
       p, li, h3{
-        color: white;
+        color: black;
       }
     </style>
   </head>
   <body>
+<nav class='navbar navbar-default' id='nav'>
+  <div class='container' style='margin-left:0;'>
+    <div class='navbar-header'>
+      <a href='{% url "index" %}' class='index-link'><h1>Vocab Helper</h1><p class='subtitle'>
+        The fastest way to study for vocab quizzes and tests!
+      </p></a>
+    </div>
+  </div>
+</nav>
     <h2>
     	Privacy Policy
     </h2>
 
-    <p>
+    <p2>
     	Your privacy is very important to us. Accordingly, we have developed this Policy in order for you to understand how we collect, use, communicate and disclose and make use of personal information. The following outlines our privacy policy.
     </p>
 
@@ -65,4 +74,9 @@
     </p>
     <p><a href='{% url "index" %}'>Back</a></p>
   </body>
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Copyright &copy; 2017 Vocab Helper. | <a href='{% url "tos" %}' class='footerlink'>Terms of Service</a> | <a href='{% url "privacy" %}' class='footerlink'>Privacy Policy</a></p>
+      </div>
+</footer>
 </html>
