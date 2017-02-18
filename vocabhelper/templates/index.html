@@ -71,7 +71,8 @@
         }, 700);
       });
     }, 1500);
-    $('.wrapper').height($(window).height() - $('footer').height());
+    //$('.wrapper').height($(window).height() - $('footer').height());
+    $('html').css('overflow', 'hidden');
   });
 
   $('#copy').on('click', function(){
