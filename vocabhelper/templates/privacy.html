@@ -15,16 +15,30 @@
     <link rel='stylesheet' href='{% static "vocabhelper/HH.css" %}?v=2'>
     <title>Vocab Helper Privacy Policy</title>
     <style>
-      html,body{
+      html, body{
         overflow: scroll;
-        padding: 1em;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      h2{
+        font-size: 2.5em;
       }
       p, li, h3{
         color: black;
       }
+      .footer{
+        position: sticky;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+      }
+      .container-fluid{
+        margin-bottom: 3em;
+      }
     </style>
   </head>
   <body>
+  <div class='container-fluid'>
     <h2>
     	Privacy Policy
     </h2>
@@ -64,10 +78,7 @@
     	We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained.
     </p>
     <p><a href='{% url "index" %}'>Back</a></p>
+  </div
   </body>
-<footer class="footer">
-      <div class="container">
-        <p class="text-muted">Copyright &copy; 2017 Vocab Helper. | <a href='{% url "tos" %}' class='footerlink'>Terms of Service</a> | <a href='{% url "privacy" %}' class='footerlink'>Privacy Policy</a></p>
-      </div>
-</footer>
+{% include "footer.html" %}
 </html>

@@ -19,11 +19,14 @@
         padding: 0;
         margin-bottom: 0;
       }
+      h2{
+        font-size: 2.5em;
+      }
       p, li, h3{
         color: black;
       }
       .footer{
-        position: static;
+        position: sticky;
         bottom: 0px;
         left: 0px;
         width: 100%;
@@ -130,9 +133,5 @@
 <p><a href='{% url "index" %}'>Back</a></p>
 </div>
   </body>
-  <div class="footer">
-        <div>
-          <p class="text-muted">Copyright &copy; 2017 Vocab Helper. | <a href='{% url "tos" %}' class='footerlink'>Terms of Service</a> | <a href='{% url "privacy" %}' class='footerlink'>Privacy Policy</a></p>
-        </div>
-  </div>
+  {% include "footer.html" %}
 </html>
