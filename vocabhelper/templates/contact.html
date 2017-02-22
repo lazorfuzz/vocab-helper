@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include "head.html" %}
+    <title>Contact Us</title>
+    <style>
+      input, textarea{
+        width: 100%;
+        color: #3AE470;
+        border:none;
+        background-color: #444;
+        font-size: 1.5em;
+        font-weight: 100;
+        padding: 10px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        outline: none;
+        letter-spacing: 2px;
+        margin-bottom: 1em;
+      }
+      input:focus, textarea:focus {
+        box-shadow: 0 0 5px #3AE470;
+        border: 1px solid #3AE470;
+      }
+      textarea{
+        height: 8em;
+        margin-bottom: 1em;
+      }
+      .button{
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    {% include "header.html" %}
+      <h2>Contact</h2>
+      <div class='col-md-4 col-md-offset-4' style='margin-bottom: 3em;'>
+        {% csrf_token %}
+        <form name='contactform' id='contactform'>
+          <div class='row'>
+            <input type='email' name='email' id='email' placeholder='Email'/>
+          </div>
+          <div class='row'>
+            <input type='text' name='subject' id='subject' placeholder='Subject' />
+          </div>
+          <div class='row'>
+            <textarea id='msg' form='contactform' placeholder='Message'></textarea>
+          </div>
+          <p id='status' style='display:none;'>
+            Your message has been submitted!
+          </p>
+        </form>
+        <div style='text-align:center;'>
+          <button class='button' onclick='submitForm();'>Submit</button>
+        </div>
+      </div>
+    {% include "footer.html" %}
+
+    <script>
+      function submitForm(){
+        if ($('#email').val() == '' || $('#subject').val() == '' || $('#msg').val() == ''){
+          alert('Forgetting something?');
+          return;
+        }
+        var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+        var email = $('#email').val();
+        var subject = $('#subject').val();
+        var msg = $('#msg').val();
+
+        $.post('{% url "contact" %}', {'csrfmiddlewaretoken': csrftoken, 'email': email, 'subject': subject, 'msg': msg,},
+          function(data){
+            if (data == 'success'){
+              $('#status').css('display', '');
+              window.setTimeout(function(){
+                $('#status').css('display', 'none');
+                $('#email').val('');
+                $('#subject').val('');
+                $('#msg').val('');
+              }, 1000);
+            }
+          }).fail(function(){
+            $('#status')[0].innerText = 'An error occured.';
+            $('#status').css('display', '');
+            window.setTimeout(function(){
+              $('#status').css('display', 'none');
+            }, 1000);
+          });
+      }
+    </script>
+  </body>
+</html>

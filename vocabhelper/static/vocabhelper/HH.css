@@ -31,6 +31,21 @@ body {
 .index-link{
   text-decoration: none !important;
 }
+.active{
+  border: 2px solid #3AE470;
+  border-radius: 2px;
+}
+.navbar-right{
+  position: absolute;
+  right: 2em;
+}
+.navbar-default .navbar-nav>.active>a{
+  background-color: #333 !important;
+  color: white;
+}
+.navbar-default .navbar-nav>li>a:hover{
+  color:white;
+}
 h2{
     align-content: center;
     text-align: center;
@@ -117,6 +132,10 @@ h1{
   cursor: pointer;
 }
 @media screen and (max-device-width: 500px) {
+  .navbar-right{
+    position: relative;
+    right: auto;
+  }
   h1{
     font-size: 2.5em;
   }

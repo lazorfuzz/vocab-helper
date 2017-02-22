@@ -1,0 +1,34 @@
+<nav class='navbar navbar-default' id='nav'>
+  <div class='container' style='margin-left:0;'>
+    <div class='navbar-header'>
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navmenu" aria-expanded="true" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <a href='{% url "index" %}' class='index-link'><h1>Vocab Helper</h1><p class='subtitle'>
+        The fastest way to define lists of words!
+      </p></a>
+    </div>
+    <div id="navmenu" class="navbar-collapse collapse">
+ 		<ul class="nav navbar-nav navbar-right">
+	 		<li class={% if indexpage %}'active'{% endif %}>
+	 			<a href='{% url "index" %}'>
+	 				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp; Home
+	 			</a>
+	 		</li>
+	 		<li class={% if aboutpage %}'active'{% endif %}>
+	 			<a href='{% url "about" %}'>
+	 				<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>&nbsp; About
+	 			</a>
+	 		</li>
+      <li class={% if contactpage %}'active'{% endif %}>
+	 			<a href='{% url "contact" %}'>
+	 				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp; Contact
+	 			</a>
+	 		</li>
+ 		</ul>
+ 	</div>
+  </div>
+</nav>

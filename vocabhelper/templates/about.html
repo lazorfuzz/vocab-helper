@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include "head.html" %}
+    <title>About Us</title>
+  </head>
+  <style>
+    .abouttext{
+      margin: 0 2em 1em 2em;
+      font-size:1.2em;
+    }
+  </style>
+  <body>
+    {% include "header.html" %}
+    <div class='container-fluid'>
+
+      <h2>About</h2>
+      <p class='abouttext'>
+        Vocabulary Helper is a simple tool designed to bulk-define lists of words or phrases. Its uses are manyfold; studying for vocab quizzes and tests comes to mind. It's also a great tool for preparing for the SAT, ACT, and more. You can define a single word as well as any list coming from any format.
+      </p>
+      <p class='abouttext'>
+        If you have any ideas about how to make our tool better, please <a href='{% url "contact" %}'>contact us.</a>
+      </p>
+      <p class='abouttext'>
+        Vocabulary Helper is the first in a line of helper tools. Stay tuned for more tools that help students like you succeed in school!
+      </p>
+    </div>
+    {% include "footer.html" %}
+  </body>
+</html>

@@ -2,27 +2,21 @@
 {% load staticfiles %}
 <html lang="en">
 <head>
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-  google_ad_client: "ca-pub-4657194823520099",
-  enable_page_level_ads: true
-  });
-  </script>
-<meta charset="utf-8">
-<meta property="og:title" content="Vocabulary Helper" />
-<meta property="og:description" content="The fastest way to study for vocab quizzes and tests. Also a good tool to help with homework." />
-<meta property="og:url" content="http://vocabhw.com/" />
-<meta name="description" content="The fastest way to study for vocab quizzes and tests. Also a good tool to help with homework." />
-<meta name="keywords" content="quizzes, tests, school, homework, vocabulary, vocab, definition, help, dictionary" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-<link rel='stylesheet' href='{% static "vocabhelper/HH.css" %}?v=4'>
-<link rel="icon" type="image/png" href="{% static 'vocabhelper/media/logo.png' %}" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  {% include "head.html" %}
 <title>Vocab Helper</title>
+<style>
+  html, body{
+    overflow: scroll;
+    padding: 0;
+    margin-bottom: 0;
+  }
+  .container-fluid{
+    margin-bottom: 6em;
+  }
+  .abouttext{
+    margin-bottom: 2em;
+  }
+</style>
 </head>
 
 <body>
@@ -34,17 +28,9 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div>
-<nav class='navbar navbar-default' id='nav'>
-  <div class='container' style='margin-left:0;'>
-    <div class='navbar-header'>
-      <a href='{% url "index" %}' class='index-link'><h1>Vocab Helper</h1><p class='subtitle'>
-        The fastest way to study for vocab quizzes and tests!
-      </p></a>
-    </div>
-  </div>
-</nav>
-</div>
+
+{% include "header.html" %}
+
 <div class='container-fluid col-md-8 col-md-offset-2 wrapper'>
     <h2 class='animated fadeInDown' id='instructions'>Enter your list of words/phrases. Click Go to see the results.</h2>
     <div id="words-div">
@@ -54,18 +40,36 @@
             {% csrf_token %}
             <button class='button' id="go">Go</button><button class='button' id="copy" style='display:none;'>Copy</button>
     </div>
+    <p class='abouttext'>
+      Vocab Helper is a simple tool designed to define multiple words or phrases. Its uses are manyfold; studying for vocab quizzes and tests comes to mind. It's also a great tool for preparing for the SAT, ACT, and more. You can define a single word as well as any list from any format (numbered, bulletin lists, etc.).
+      Be sure to <a href='{% url "contact" %}'>contact us</a> if you have any suggestions for the site!
+    </p>
     <div class="fb-like" data-href="http://vocabhw.com" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 </div>
 
 <script>
     var words = $('#wordspace');
+    words.attr('placeholder', 'Example: \n\
+Nuclear Non-Proliferation Treaty \n\
+Third World\n\
+domino theory\n\
+Fidel Castro and Cuban Revolution\n\
+Bay of Pigs\n\
+');
     words.focus();
 
   $('#go').on('click', function(){
+    if (words.val() == ''){
+      words.val('Nuclear Non-Proliferation Treaty \n\
+Third World\n\
+domino theory\n\
+Fidel Castro and Cuban Revolution\n\
+Bay of Pigs\n');
+    }
     var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
-    $(this).attr('class', 'button animated bounceOutDown');
-    $('#copy').attr('class', 'button animated bounceOutDown');
-    words.attr('class', 'animated fadeOutRight');
+    $(this).attr('class', 'button animated bounceOut');
+    $('#copy').attr('class', 'button animated bounceOut');
+    words.attr('class', 'animated bounceOut');
 
     $('#instructions').text('Please wait.');
     window.setTimeout(function(){
@@ -75,20 +79,19 @@
         words.val(data);
       }).always(function(){
         words.css('display', '');
-        words.attr('class', 'animated fadeInRight');
+        words.attr('class', 'animated bounceIn');
         words.focus();
         $('#instructions').text('Your Results:')
         words[0].scrollTop = 0;
         window.setTimeout(function(){
           $('#go').css('display', '');
-          $('#go').attr('class', 'button animated bounceInUp');
+          $('#go').attr('class', 'button animated bounceIn');
           $('#copy').css('display', '');
-          $('#copy').attr('class', 'button animated bounceInUp');
+          $('#copy').attr('class', 'button animated bounceIn');
         }, 700);
       });
     }, 1500);
     //$('.wrapper').height($(window).height() - $('footer').height());
-    $('html').css('overflow', 'hidden');
   });
 
   $('#copy').on('click', function(){

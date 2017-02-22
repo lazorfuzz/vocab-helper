@@ -11,10 +11,33 @@ class TermsOfServicePage(TemplateView):
 class PrivacyPage(TemplateView):
     template_name = 'privacy.html'
 
+class AboutPage(TemplateView):
+    def get(self, request):
+        return render(request, 'about.html', context={'aboutpage': 'true'})
+
+class Contact(TemplateView):
+    def get(self, request):
+        return render(request, 'contact.html', context={'contactpage': 'true'})
+
+    def post(self, request):
+        email = escape(request.POST['email'])
+        subject = escape(request.POST['subject'])
+        msg = escape(request.POST['subject'])
+        requests.post(
+	            'https://api.mailgun.net/v3/mg.apolyse.com/messages',
+	            auth=('api', "key-188fe0bda2f15695e08ea26a8c164e96"),
+	            data={'from': email + ' via VocabHelper <contact@vocabhw.com>',
+	                  'to': 'leontosy@gmail.com',
+	                  'h:reply-to': email,
+	                  'subject': subject,
+	                  'text': msg})
+        return HttpResponse('success')
+
+
 class HomePage(TemplateView):
 
     def get(self, request, **kwargs):
-        return render(request, 'index.html', context=None)
+        return render(request, 'index.html', context={'indexpage': 'true'})
 
     def post(self, request):
         import difflib
