@@ -41,20 +41,50 @@
     </div>
     <div id="define">
             {% csrf_token %}
-            <button class='button' id="go">Go</button><button class='button' id="copy" style='display:none;'>Copy</button>
+            <button class='button' id="go">Go</button><button class='button' id="copy" style='display:none;' data-clipboard-target="#wordspace">Copy</button>
     </div>
     <div class='info'>
       <p class='abouttext'>
-        <b>Vocab Helper</b> is a simple tool for defining multiple words or phrases. Its uses are manyfold; studying for vocab quizzes and tests comes to mind. It's also a great tool for preparing for the SAT, ACT, and more. You can define a single word as well as any list from any format (numbered, bulletin lists, etc.).
+        <b>Vocab Helper</b> is a simple tool for defining multiple words or phrases. Its uses are manyfold; studying for vocab quizzes and tests comes to mind. It's also a great tool for preparing for the SAT, ACT, and more. You can define a single word as well as any list of words from any format (numbered, bulletin lists, etc.).
         Be sure to <a href='{% url "contact" %}'>contact us</a> if you have any suggestions for the site!
       </p>
     </div>
     <div class="fb-like" data-href="http://vocabhw.com" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
-</div>
+    </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
 <script>
+    new Clipboard('#copy');
     var words = $('#wordspace');
     words.focus();
+
+    function define(){
+      var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+      $('#go').attr('class', 'button animated bounceOut');
+      $('#copy').attr('class', 'button animated bounceOut');
+      words.attr('class', 'animated bounceOut');
+
+      $('#instructions').text('Please wait.');
+      window.setTimeout(function(){
+        var data = words.val();
+        words.val('');
+        $.post('{% url "index" %}', {'words': data, 'csrfmiddlewaretoken': csrftoken}, function(data){
+          words.val(data);
+        }).always(function(){
+          words.css('display', '');
+          words.attr('class', 'animated bounceIn');
+          words.focus();
+          $('#instructions').text('Your Results:')
+          words[0].scrollTop = 0;
+          window.setTimeout(function(){
+            $('#go').css('display', '');
+            $('#go').attr('class', 'button animated bounceIn');
+            $('#copy').css('display', '');
+            $('#copy').attr('class', 'button animated bounceIn');
+          }, 700);
+        });
+      }, 1500);
+    }
 
   $('#go').on('click', function(){
     if (words.val() == ''){
@@ -63,39 +93,15 @@ Third World\n\
 Lech Walesa and Solidarity\n\
 Deng Xiaoping\n\
 Bay of Pigs\n');
+      window.setTimeout(function(){define();}, 600);
+      return;
     }
-    var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
-    $(this).attr('class', 'button animated bounceOut');
-    $('#copy').attr('class', 'button animated bounceOut');
-    words.attr('class', 'animated bounceOut');
+    define();
 
-    $('#instructions').text('Please wait.');
-    window.setTimeout(function(){
-      var data = words.val();
-      words.val('');
-      $.post('{% url "index" %}', {'words': data, 'csrfmiddlewaretoken': csrftoken}, function(data){
-        words.val(data);
-      }).always(function(){
-        words.css('display', '');
-        words.attr('class', 'animated bounceIn');
-        words.focus();
-        $('#instructions').text('Your Results:')
-        words[0].scrollTop = 0;
-        window.setTimeout(function(){
-          $('#go').css('display', '');
-          $('#go').attr('class', 'button animated bounceIn');
-          $('#copy').css('display', '');
-          $('#copy').attr('class', 'button animated bounceIn');
-        }, 700);
-      });
-    }, 1500);
-    //$('.wrapper').height($(window).height() - $('footer').height());
   });
 
   $('#copy').on('click', function(){
-    words.select();
-    document.execCommand("copy");
-    alert('The results have been saved to your clipboard. Thanks for using Vocab Helper. Be sure to recommend me to a friend!');
+    alert('Your definitions have been saved to your clipboard. Be sure to recommend Vocab Helper to a friend!');
   });
 
 </script>
