@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   {% include "head.html" %}
-<title>Vocab Helper</title>
+<title>Vocab Helper - Define Multiple Words</title>
 <style>
   html, body{
     overflow: scroll;
@@ -13,7 +13,10 @@
   .container-fluid{
     margin-bottom: 6em;
   }
-  .abouttext{
+  .info{
+    padding: 1em;
+    border-radius: 5px;
+    background-color: white;
     margin-bottom: 2em;
   }
 </style>
@@ -40,10 +43,12 @@
             {% csrf_token %}
             <button class='button' id="go">Go</button><button class='button' id="copy" style='display:none;'>Copy</button>
     </div>
-    <p class='abouttext'>
-      Vocab Helper is a simple tool designed to define multiple words or phrases. Its uses are manyfold; studying for vocab quizzes and tests comes to mind. It's also a great tool for preparing for the SAT, ACT, and more. You can define a single word as well as any list from any format (numbered, bulletin lists, etc.).
-      Be sure to <a href='{% url "contact" %}'>contact us</a> if you have any suggestions for the site!
-    </p>
+    <div class='info'>
+      <p class='abouttext'>
+        <b>Vocab Helper</b> is a simple tool for defining multiple words or phrases. Its uses are manyfold; studying for vocab quizzes and tests comes to mind. It's also a great tool for preparing for the SAT, ACT, and more. You can define a single word as well as any list from any format (numbered, bulletin lists, etc.).
+        Be sure to <a href='{% url "contact" %}'>contact us</a> if you have any suggestions for the site!
+      </p>
+    </div>
     <div class="fb-like" data-href="http://vocabhw.com" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 </div>
 
