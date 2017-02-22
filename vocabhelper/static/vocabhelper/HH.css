@@ -2,9 +2,12 @@ html {
   height: 100%;
   box-sizing: border-box;
 }
-*,
-*:before,
-*:after {
+html, body{
+  overflow: scroll;
+  padding: 0;
+  margin-bottom: 0;
+}
+*, *:before, *:after {
   box-sizing: inherit;
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
@@ -15,7 +18,6 @@ body {
   background-color: #EEF7EE;
   backgqround-image: url(http://api.thumbr.it/whitenoise-10x10.png?background=292929ff&noise=3be370&density=2&opacity=19);
   background-repeat: repeat;
-  overflow: scroll;
 
 }
 .navbar{
