@@ -136,6 +136,9 @@ h1{
     position: relative;
     right: auto;
   }
+  .subtitle{
+    color: #F65345;
+  }
   h1{
     font-size: 2.5em;
   }
@@ -147,7 +150,7 @@ h1{
     font-size: 0.9em;
   }
   h2{
-    font-size: 1em;
+    font-size: 1.3em;
     font-weight: normal;
   }
   .button{
