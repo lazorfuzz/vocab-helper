@@ -32,9 +32,9 @@
 {% include "header.html" %}
 
 <div class='container-fluid col-md-8 col-md-offset-2 wrapper'>
-    <h2 class='animated fadeInDown' id='instructions'>Enter your list of words/phrases. Click Go to see the results.</h2>
+    <h2 class='animated fadeInDown' id='instructions'>Enter your list of words/phrases. Press Go to see the results.</h2>
     <div id="words-div">
-            <textarea id="wordspace"></textarea>
+            <textarea id="wordspace" placeholder='To demo this tool, press Go to see an example output.'></textarea>
     </div>
     <div id="define">
             {% csrf_token %}
@@ -44,25 +44,19 @@
       Vocab Helper is a simple tool designed to define multiple words or phrases. Its uses are manyfold; studying for vocab quizzes and tests comes to mind. It's also a great tool for preparing for the SAT, ACT, and more. You can define a single word as well as any list from any format (numbered, bulletin lists, etc.).
       Be sure to <a href='{% url "contact" %}'>contact us</a> if you have any suggestions for the site!
     </p>
-    <div class="fb-like" data-href="http://vocabhw.com" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div class="fb-like" data-href="http://vocabhw.com" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 </div>
 
 <script>
     var words = $('#wordspace');
-    words.attr('placeholder', 'Example: \n\
-Nuclear Non-Proliferation Treaty \n\
-Third World\n\
-domino theory\n\
-Fidel Castro and Cuban Revolution\n\
-Bay of Pigs\n');
     words.focus();
 
   $('#go').on('click', function(){
     if (words.val() == ''){
       words.val('Nuclear Non-Proliferation Treaty \n\
 Third World\n\
-domino theory\n\
-Fidel Castro and Cuban Revolution\n\
+Lech Walesa and Solidarity\n\
+Deng Xiaoping\n\
 Bay of Pigs\n');
     }
     var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
