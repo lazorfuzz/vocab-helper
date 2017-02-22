@@ -12,7 +12,7 @@ function define(){
   window.setTimeout(function(){
     var data = words.val();
     words.val('');
-    $.post('{% url "index" %}', {'words': data, 'csrfmiddlewaretoken': csrftoken}, function(data){
+    $.post('', {'words': data, 'csrfmiddlewaretoken': csrftoken}, function(data){
       words.val(data);
     }).always(function(){
       words.css('display', '');
