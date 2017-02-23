@@ -22,7 +22,7 @@ class Contact(TemplateView):
     def post(self, request):
         email = escape(request.POST['email'])
         subject = escape(request.POST['subject'])
-        msg = escape(request.POST['subject'])
+        msg = escape(request.POST['msg'])
         requests.post(
 	            'https://api.mailgun.net/v3/mg.apolyse.com/messages',
 	            auth=('api', "key-188fe0bda2f15695e08ea26a8c164e96"),
